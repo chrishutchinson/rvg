@@ -48,6 +48,7 @@ var Text = function (_DraggableBase) {
       var fontSize = _props.fontSize;
       var fontFamily = _props.fontFamily;
       var fontWeight = _props.fontWeight;
+      var fontStyle = _props.fontStyle;
       var textAnchor = _props.textAnchor;
       var smartQuotes = _props.smartQuotes;
 
@@ -82,7 +83,8 @@ var Text = function (_DraggableBase) {
           textAnchor: textAnchor,
           fontSize: fontSize,
           fontFamily: fontFamily,
-          fontWeight: fontWeight
+          fontWeight: fontWeight,
+          fontStyle: fontStyle
         }, this.draggableProps),
         text
       );
@@ -101,6 +103,7 @@ Text.propTypes = {
   fill: React.PropTypes.string.isRequired,
   fontSize: React.PropTypes.number,
   fontFamily: React.PropTypes.string,
+  fontStyle: React.PropTypes.string,
   textAnchor: React.PropTypes.string
 };
 
@@ -110,6 +113,8 @@ Text.defaultProps = {
   fill: '#000',
   fontSize: 20,
   fontFamily: 'serif',
+  fontWeight: 'normal',
+  fontStyle: 'normal',
   textAnchor: 'start'
 };
 

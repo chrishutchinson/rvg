@@ -23,8 +23,12 @@ class Text extends DraggableBase {
     const {
       x, y,
       fill,
-      fontSize, fontFamily, fontWeight,
-      textAnchor, smartQuotes
+      fontSize, 
+      fontFamily, 
+      fontWeight,
+      fontStyle,
+      textAnchor, 
+      smartQuotes
     } = this.props;
     
     let text = this.props.children;
@@ -53,6 +57,7 @@ class Text extends DraggableBase {
             fontSize={fontSize}
             fontFamily={fontFamily}
             fontWeight={fontWeight}
+            fontStyle={fontStyle}
             {...this.draggableProps}>
         {text}
       </text>
@@ -68,6 +73,8 @@ Text.propTypes = {
   fill: React.PropTypes.string.isRequired,
   fontSize: React.PropTypes.number,
   fontFamily: React.PropTypes.string,
+  fontWeight: React.PropTypes.string,
+  fontStyle: React.PropTypes.string,
   textAnchor: React.PropTypes.string
 };
 
@@ -77,6 +84,8 @@ Text.defaultProps = {
   fill: '#000',
   fontSize: 20,
   fontFamily: 'serif',
+  fontWeight: 'normal',
+  fontStyle: 'normal',
   textAnchor: 'start'
 }
 
