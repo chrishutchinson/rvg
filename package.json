@@ -5,18 +5,20 @@
   "main": "dist/elements.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "./node_modules/babel-cli/bin/babel.js ./src --out-dir ./dist --presets es2015,react",
-    "watch": "./node_modules/babel-cli/bin/babel.js ./src --out-dir ./dist --presets es2015,react --watch"
+    "build":
+      "./node_modules/babel-cli/bin/babel.js ./src --out-dir ./dist --presets env,react",
+    "watch":
+      "./node_modules/babel-cli/bin/babel.js ./src --out-dir ./dist --presets env,react --watch"
   },
   "author": "Chris Hutchinson",
   "license": "ISC",
   "dependencies": {
-    "react": "^15.3.2",
-    "react-addons-shallow-compare": "^15.3.2"
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.14.0",
-    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.11.1"
   }
 }

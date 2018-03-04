@@ -1,28 +1,25 @@
-const React = require('react');
-const shallowCompare = require('react-addons-shallow-compare');
+const React = require("react");
 
 class DraggableBase extends React.Component {
-
   constructor(props) {
     super(props);
 
     this.draggableProps = {};
-    if(this.props.draggable) {
+    if (this.props.draggable) {
       this.draggableProps = {
-        'data-draggable': true,
+        "data-draggable": true,
         style: {
-          cursor: 'move'
+          cursor: "move"
         }
       };
     } else {
       this.draggableProps = {
         style: {
-          'pointerEvents': 'none'
+          pointerEvents: "none"
         }
-      }
+      };
     }
   }
-
 }
 
 module.exports = DraggableBase;

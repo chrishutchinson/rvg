@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -10,9 +10,10 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var React = require('react');
+var React = require("react");
+var PropTypes = require("prop-types");
 
-var DraggableBase = require('./base/draggable');
+var DraggableBase = require("./base/draggable");
 
 var Path = function (_DraggableBase) {
   _inherits(Path, _DraggableBase);
@@ -24,18 +25,15 @@ var Path = function (_DraggableBase) {
   }
 
   _createClass(Path, [{
-    key: 'render',
+    key: "render",
     value: function render() {
-      var _props = this.props;
-      var d = _props.d;
-      var fill = _props.fill;
-      var transform = _props.transform;
+      var _props = this.props,
+          d = _props.d,
+          fill = _props.fill,
+          transform = _props.transform;
 
 
-      return React.createElement('path', _extends({ d: d,
-        fill: fill,
-        transform: transform
-      }, this.draggableProps));
+      return React.createElement("path", _extends({ d: d, fill: fill, transform: transform }, this.draggableProps));
     }
   }]);
 
@@ -46,7 +44,7 @@ var Path = function (_DraggableBase) {
 
 
 Path.propTypes = {
-  d: React.PropTypes.string.isRequired
+  d: PropTypes.string.isRequired
 };
 
 Path.defaultProps = {};

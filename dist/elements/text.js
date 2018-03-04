@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -10,23 +10,24 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var util = require('util');
-var React = require('react');
+var util = require("util");
+var React = require("react");
+var PropTypes = require("prop-types");
 
-var DraggableBase = require('./base/draggable');
+var DraggableBase = require("./base/draggable");
 
 String.prototype.addSmartQuotes = function () {
-  return this.replace(/(\W|^)"(\S)/g, '$1“$2') // beginning "
-  .replace(/(\u201c[^"]*)"([^"]*$|[^\u201c"]*\u201c)/g, '$1”$2') // ending "
-  .replace(/([^0-9])"/g, '$1”') // remaining " at end of word
-  .replace(/(\W|^)'(\S)/g, '$1‘$2') // beginning '
-  .replace(/([a-z])'([a-z])/ig, '$1’$2') // conjunction's possession
-  .replace(/((\u2018[^']*)|[a-z])'([^0-9]|$)/ig, '$1’$3') // ending '
-  .replace(/(\u2018)([0-9]{2}[^\u2019]*)(\u2018([^0-9]|$)|$|\u2019[a-z])/ig, '’$2$3') // abbrev. years like '93
-  .replace(/(\B|^)\u2018(?=([^\u2019]*\u2019\b)*([^\u2019\u2018]*\W[\u2019\u2018]\b|[^\u2019\u2018]*$))/ig, '$1’') // backwards apostrophe
-  .replace(/'''/g, '‴') // triple prime
-  .replace(/("|'')/g, '″') // double prime
-  .replace(/'/g, '′'); // prime
+  return this.replace(/(\W|^)"(\S)/g, "$1\u201C$2") // beginning "
+  .replace(/(\u201c[^"]*)"([^"]*$|[^\u201c"]*\u201c)/g, "$1\u201D$2") // ending "
+  .replace(/([^0-9])"/g, "$1\u201D") // remaining " at end of word
+  .replace(/(\W|^)'(\S)/g, "$1\u2018$2") // beginning '
+  .replace(/([a-z])'([a-z])/gi, "$1\u2019$2") // conjunction's possession
+  .replace(/((\u2018[^']*)|[a-z])'([^0-9]|$)/gi, "$1\u2019$3") // ending '
+  .replace(/(\u2018)([0-9]{2}[^\u2019]*)(\u2018([^0-9]|$)|$|\u2019[a-z])/gi, "\u2019$2$3") // abbrev. years like '93
+  .replace(/(\B|^)\u2018(?=([^\u2019]*\u2019\b)*([^\u2019\u2018]*\W[\u2019\u2018]\b|[^\u2019\u2018]*$))/gi, "$1\u2019") // backwards apostrophe
+  .replace(/'''/g, "\u2034") // triple prime
+  .replace(/("|'')/g, "\u2033") // double prime
+  .replace(/'/g, "\u2032"); // prime
 };
 
 var Text = function (_DraggableBase) {
@@ -39,17 +40,17 @@ var Text = function (_DraggableBase) {
   }
 
   _createClass(Text, [{
-    key: 'render',
+    key: "render",
     value: function render() {
-      var _props = this.props;
-      var x = _props.x;
-      var y = _props.y;
-      var fill = _props.fill;
-      var fontSize = _props.fontSize;
-      var fontFamily = _props.fontFamily;
-      var fontWeight = _props.fontWeight;
-      var textAnchor = _props.textAnchor;
-      var smartQuotes = _props.smartQuotes;
+      var _props = this.props,
+          x = _props.x,
+          y = _props.y,
+          fill = _props.fill,
+          fontSize = _props.fontSize,
+          fontFamily = _props.fontFamily,
+          fontWeight = _props.fontWeight,
+          textAnchor = _props.textAnchor,
+          smartQuotes = _props.smartQuotes;
 
 
       var text = this.props.children;
@@ -63,8 +64,13 @@ var Text = function (_DraggableBase) {
           }
 
           return React.createElement(
-            'tspan',
-            { key: index, x: x, y: lineHeight * index + y, alignmentBaseline: 'before-edge' },
+            "tspan",
+            {
+              key: index,
+              x: x,
+              y: lineHeight * index + y,
+              alignmentBaseline: "before-edge"
+            },
             string
           );
         });
@@ -75,8 +81,9 @@ var Text = function (_DraggableBase) {
       }
 
       return React.createElement(
-        'text',
-        _extends({ x: x,
+        "text",
+        _extends({
+          x: x,
           y: y,
           fill: fill,
           textAnchor: textAnchor,
@@ -96,21 +103,21 @@ var Text = function (_DraggableBase) {
 
 
 Text.propTypes = {
-  x: React.PropTypes.any.isRequired,
-  y: React.PropTypes.any.isRequired,
-  fill: React.PropTypes.string.isRequired,
-  fontSize: React.PropTypes.number,
-  fontFamily: React.PropTypes.string,
-  textAnchor: React.PropTypes.string
+  x: PropTypes.any.isRequired,
+  y: PropTypes.any.isRequired,
+  fill: PropTypes.string.isRequired,
+  fontSize: PropTypes.number,
+  fontFamily: PropTypes.string,
+  textAnchor: PropTypes.string
 };
 
 Text.defaultProps = {
   x: 0,
   y: 0,
-  fill: '#000',
+  fill: "#000",
   fontSize: 20,
-  fontFamily: 'serif',
-  textAnchor: 'start'
+  fontFamily: "serif",
+  textAnchor: "start"
 };
 
 module.exports = Text;

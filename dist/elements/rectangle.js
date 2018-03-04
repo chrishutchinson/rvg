@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -10,9 +10,10 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var React = require('react');
+var React = require("react");
+var PropTypes = require("prop-types");
 
-var DraggableBase = require('./base/draggable');
+var DraggableBase = require("./base/draggable");
 
 var Rectangle = function (_DraggableBase) {
   _inherits(Rectangle, _DraggableBase);
@@ -24,22 +25,23 @@ var Rectangle = function (_DraggableBase) {
   }
 
   _createClass(Rectangle, [{
-    key: 'render',
+    key: "render",
     value: function render() {
-      var _props = this.props;
-      var x = _props.x;
-      var y = _props.y;
-      var fill = _props.fill;
-      var gradient = _props.gradient;
-      var height = _props.height;
-      var width = _props.width;
+      var _props = this.props,
+          x = _props.x,
+          y = _props.y,
+          fill = _props.fill,
+          gradient = _props.gradient,
+          height = _props.height,
+          width = _props.width;
 
 
       if (gradient) {
         fill = gradient;
       }
 
-      return React.createElement('rect', _extends({ x: x,
+      return React.createElement("rect", _extends({
+        x: x,
         y: y,
         fill: fill,
         height: height,
@@ -55,17 +57,17 @@ var Rectangle = function (_DraggableBase) {
 
 
 Rectangle.propTypes = {
-  x: React.PropTypes.any.isRequired,
-  y: React.PropTypes.any.isRequired,
-  fill: React.PropTypes.string.isRequired,
-  height: React.PropTypes.any.isRequired,
-  width: React.PropTypes.any.isRequired
+  x: PropTypes.any.isRequired,
+  y: PropTypes.any.isRequired,
+  fill: PropTypes.string.isRequired,
+  height: PropTypes.any.isRequired,
+  width: PropTypes.any.isRequired
 };
 
 Rectangle.defaultProps = {
   x: 0,
   y: 0,
-  fill: '#000',
+  fill: "#000",
   height: 100,
   width: 100
 };

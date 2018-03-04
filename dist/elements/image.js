@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -10,9 +10,10 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var React = require('react');
+var React = require("react");
+var PropTypes = require("prop-types");
 
-var DraggableBase = require('./base/draggable');
+var DraggableBase = require("./base/draggable");
 
 var Image = function (_DraggableBase) {
   _inherits(Image, _DraggableBase);
@@ -24,23 +25,24 @@ var Image = function (_DraggableBase) {
   }
 
   _createClass(Image, [{
-    key: 'render',
+    key: "render",
     value: function render() {
-      var _props = this.props;
-      var x = _props.x;
-      var y = _props.y;
-      var height = _props.height;
-      var width = _props.width;
-      var href = _props.href;
-      var opacity = _props.opacity;
+      var _props = this.props,
+          x = _props.x,
+          y = _props.y,
+          height = _props.height,
+          width = _props.width,
+          href = _props.href,
+          opacity = _props.opacity;
 
 
-      return React.createElement('image', _extends({ xlinkHref: href,
+      return React.createElement("image", _extends({
+        xlinkHref: href,
         x: x,
         y: y,
         height: height,
         width: width,
-        preserveAspectRatio: 'xMinYMin meet',
+        preserveAspectRatio: "xMinYMin meet",
         opacity: opacity
       }, this.draggableProps));
     }
@@ -53,10 +55,10 @@ var Image = function (_DraggableBase) {
 
 
 Image.propTypes = {
-  x: React.PropTypes.number.isRequired,
-  y: React.PropTypes.number.isRequired,
-  href: React.PropTypes.string.isRequired,
-  ratio: React.PropTypes.string.isRequired
+  x: PropTypes.number.isRequired,
+  y: PropTypes.number.isRequired,
+  href: PropTypes.string.isRequired,
+  ratio: PropTypes.string.isRequired
 };
 
 Image.defaultProps = {

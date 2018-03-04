@@ -1,33 +1,23 @@
-const React = require('react');
+const React = require("react");
+const PropTypes = require("prop-types");
 
-const DraggableBase = require('./base/draggable');
+const DraggableBase = require("./base/draggable");
 
 class Path extends DraggableBase {
-
   render() {
-    const {
-      d,
-      fill,
-      transform
-    } = this.props;
-    
+    const { d, fill, transform } = this.props;
+
     return (
-      <path d={d}
-            fill={fill}
-            transform={transform}
-            {...this.draggableProps} />
+      <path d={d} fill={fill} transform={transform} {...this.draggableProps} />
     );
   }
-
 }
 
 // Prop types
 Path.propTypes = {
-  d: React.PropTypes.string.isRequired
+  d: PropTypes.string.isRequired
 };
 
-Path.defaultProps = {
-  
-}
+Path.defaultProps = {};
 
 module.exports = Path;

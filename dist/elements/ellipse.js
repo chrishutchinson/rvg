@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -10,9 +10,10 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var React = require('react');
+var React = require("react");
+var PropTypes = require("prop-types");
 
-var DraggableBase = require('./base/draggable');
+var DraggableBase = require("./base/draggable");
 
 var Ellipse = function (_DraggableBase) {
   _inherits(Ellipse, _DraggableBase);
@@ -24,17 +25,18 @@ var Ellipse = function (_DraggableBase) {
   }
 
   _createClass(Ellipse, [{
-    key: 'render',
+    key: "render",
     value: function render() {
-      var _props = this.props;
-      var x = _props.x;
-      var y = _props.y;
-      var fill = _props.fill;
-      var radiusX = _props.radiusX;
-      var radiusY = _props.radiusY;
+      var _props = this.props,
+          x = _props.x,
+          y = _props.y,
+          fill = _props.fill,
+          radiusX = _props.radiusX,
+          radiusY = _props.radiusY;
 
 
-      return React.createElement('ellipse', _extends({ cx: x,
+      return React.createElement("ellipse", _extends({
+        cx: x,
         cy: y,
         fill: fill,
         rx: radiusX,
@@ -50,17 +52,17 @@ var Ellipse = function (_DraggableBase) {
 
 
 Ellipse.propTypes = {
-  x: React.PropTypes.any.isRequired,
-  y: React.PropTypes.any.isRequired,
-  fill: React.PropTypes.string.isRequired,
-  radiusX: React.PropTypes.any.isRequired,
-  radiusY: React.PropTypes.any.isRequired
+  x: PropTypes.any.isRequired,
+  y: PropTypes.any.isRequired,
+  fill: PropTypes.string.isRequired,
+  radiusX: PropTypes.any.isRequired,
+  radiusY: PropTypes.any.isRequired
 };
 
 Ellipse.defaultProps = {
   x: 100,
   y: 50,
-  fill: '#000',
+  fill: "#000",
   radiusX: 100,
   radiusY: 50
 };

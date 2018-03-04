@@ -1,47 +1,44 @@
-const React = require('react');
+const React = require("react");
+const PropTypes = require("prop-types");
 
-const DraggableBase = require('./base/draggable');
+const DraggableBase = require("./base/draggable");
 
 class Rectangle extends DraggableBase {
-
   render() {
-    let {
-      x, y,
-      fill, gradient,
-      height, width
-    } = this.props;
+    let { x, y, fill, gradient, height, width } = this.props;
 
-    if(gradient) {
+    if (gradient) {
       fill = gradient;
     }
-    
+
     return (
-      <rect x={x}
-            y={y}
-            fill={fill}
-            height={height}
-            width={width}
-            {...this.draggableProps} />
+      <rect
+        x={x}
+        y={y}
+        fill={fill}
+        height={height}
+        width={width}
+        {...this.draggableProps}
+      />
     );
   }
-
 }
 
 // Prop types
 Rectangle.propTypes = {
-  x: React.PropTypes.any.isRequired,
-  y: React.PropTypes.any.isRequired,
-  fill: React.PropTypes.string.isRequired,
-  height: React.PropTypes.any.isRequired,
-  width: React.PropTypes.any.isRequired
+  x: PropTypes.any.isRequired,
+  y: PropTypes.any.isRequired,
+  fill: PropTypes.string.isRequired,
+  height: PropTypes.any.isRequired,
+  width: PropTypes.any.isRequired
 };
 
 Rectangle.defaultProps = {
   x: 0,
   y: 0,
-  fill: '#000',
+  fill: "#000",
   height: 100,
   width: 100
-}
+};
 
 module.exports = Rectangle;
