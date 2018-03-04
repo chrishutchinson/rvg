@@ -1,11 +1,21 @@
+import Image from "./elements/image";
+import SVG from "./elements/svg";
+import Text from "./elements/text";
+import Rectangle from "./elements/rectangle";
+import Circle from "./elements/circle";
+import Ellipse from "./elements/ellipse";
+import Line from "./elements/line";
+import Path from "./elements/path";
+import LinearGradient from "./elements/linear-gradient";
+
 module.exports = {
-  SVG: require('./elements/svg'),
-  Text: require('./elements/text'),
-  Rectangle: require('./elements/rectangle'),
-  Circle: require('./elements/circle'),
-  Ellipse: require('./elements/ellipse'),
-  Line: require('./elements/line'),
-  Image: require('./elements/image'),
-  Path: require('./elements/path'),
-  LinearGradient: require('./elements/linear-gradient')
+  SVG,
+  Text,
+  Rectangle,
+  Circle,
+  Ellipse,
+  Line,
+  Image,
+  Path,
+  LinearGradient
 };

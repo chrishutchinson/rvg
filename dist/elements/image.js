@@ -1,70 +1,43 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _react = require("react");
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var _react2 = _interopRequireDefault(_react);
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+var _withDrag = require("./base/with-drag");
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+var _withDrag2 = _interopRequireDefault(_withDrag);
 
-var React = require("react");
-var PropTypes = require("prop-types");
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var DraggableBase = require("./base/draggable");
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
-var Image = function (_DraggableBase) {
-  _inherits(Image, _DraggableBase);
+var Image = function Image(_ref) {
+  var _ref$x = _ref.x,
+      x = _ref$x === undefined ? 0 : _ref$x,
+      _ref$y = _ref.y,
+      y = _ref$y === undefined ? 0 : _ref$y,
+      height = _ref.height,
+      width = _ref.width,
+      href = _ref.href,
+      opacity = _ref.opacity,
+      props = _objectWithoutProperties(_ref, ["x", "y", "height", "width", "href", "opacity"]);
 
-  function Image() {
-    _classCallCheck(this, Image);
-
-    return _possibleConstructorReturn(this, (Image.__proto__ || Object.getPrototypeOf(Image)).apply(this, arguments));
-  }
-
-  _createClass(Image, [{
-    key: "render",
-    value: function render() {
-      var _props = this.props,
-          x = _props.x,
-          y = _props.y,
-          height = _props.height,
-          width = _props.width,
-          href = _props.href,
-          opacity = _props.opacity;
-
-
-      return React.createElement("image", _extends({
-        xlinkHref: href,
-        x: x,
-        y: y,
-        height: height,
-        width: width,
-        preserveAspectRatio: "xMinYMin meet",
-        opacity: opacity
-      }, this.draggableProps));
-    }
-  }]);
-
-  return Image;
-}(DraggableBase);
-
-// Prop types
-
-
-Image.propTypes = {
-  x: PropTypes.number.isRequired,
-  y: PropTypes.number.isRequired,
-  href: PropTypes.string.isRequired,
-  ratio: PropTypes.string.isRequired
+  return _react2.default.createElement("image", _extends({
+    xlinkHref: href,
+    x: x,
+    y: y,
+    height: height,
+    width: width,
+    preserveAspectRatio: "xMinYMin meet",
+    opacity: opacity
+  }, props));
 };
 
-Image.defaultProps = {
-  x: 0,
-  y: 0,
-  ratio: "auto"
-};
-
-module.exports = Image;
+exports.default = (0, _withDrag2.default)(Image);

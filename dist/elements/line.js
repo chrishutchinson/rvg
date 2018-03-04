@@ -1,64 +1,33 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _react = require("react");
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var _react2 = _interopRequireDefault(_react);
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+var _withDrag = require("./base/with-drag");
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+var _withDrag2 = _interopRequireDefault(_withDrag);
 
-var React = require("react");
-var PropTypes = require("prop-types");
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var DraggableBase = require("./base/draggable");
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
-var Line = function (_DraggableBase) {
-  _inherits(Line, _DraggableBase);
+var Line = function Line(_ref) {
+  var _ref$x = _ref.x,
+      x = _ref$x === undefined ? [100, 200] : _ref$x,
+      _ref$y = _ref.y,
+      y = _ref$y === undefined ? [50, 100] : _ref$y,
+      _ref$stroke = _ref.stroke,
+      stroke = _ref$stroke === undefined ? "#000" : _ref$stroke,
+      props = _objectWithoutProperties(_ref, ["x", "y", "stroke"]);
 
-  function Line() {
-    _classCallCheck(this, Line);
-
-    return _possibleConstructorReturn(this, (Line.__proto__ || Object.getPrototypeOf(Line)).apply(this, arguments));
-  }
-
-  _createClass(Line, [{
-    key: "render",
-    value: function render() {
-      var _props = this.props,
-          x = _props.x,
-          y = _props.y,
-          stroke = _props.stroke;
-
-
-      return React.createElement("line", _extends({
-        x1: x[0],
-        x2: x[1],
-        y1: y[0],
-        y2: y[1],
-        stroke: stroke
-      }, this.draggableProps));
-    }
-  }]);
-
-  return Line;
-}(DraggableBase);
-
-// Prop types
-
-
-Line.propTypes = {
-  x: PropTypes.array.isRequired,
-  y: PropTypes.array.isRequired,
-  stroke: PropTypes.string.isRequired
+  return _react2.default.createElement("line", _extends({ x1: x[0], x2: x[1], y1: y[0], y2: y[1], stroke: stroke }, props));
 };
 
-Line.defaultProps = {
-  x: [100, 200],
-  y: [50, 100],
-  stroke: "#000"
-};
-
-module.exports = Line;
+exports.default = (0, _withDrag2.default)(Line);

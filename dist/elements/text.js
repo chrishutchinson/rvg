@@ -1,23 +1,29 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _util = require("util");
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var _util2 = _interopRequireDefault(_util);
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+var _react = require("react");
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+var _react2 = _interopRequireDefault(_react);
 
-var util = require("util");
-var React = require("react");
-var PropTypes = require("prop-types");
+var _withDrag = require("./base/with-drag");
 
-var DraggableBase = require("./base/draggable");
+var _withDrag2 = _interopRequireDefault(_withDrag);
 
-String.prototype.addSmartQuotes = function () {
-  return this.replace(/(\W|^)"(\S)/g, "$1\u201C$2") // beginning "
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+var addSmartQuotes = function addSmartQuotes(string) {
+  return string.replace(/(\W|^)"(\S)/g, "$1\u201C$2") // beginning "
   .replace(/(\u201c[^"]*)"([^"]*$|[^\u201c"]*\u201c)/g, "$1\u201D$2") // ending "
   .replace(/([^0-9])"/g, "$1\u201D") // remaining " at end of word
   .replace(/(\W|^)'(\S)/g, "$1\u2018$2") // beginning '
@@ -27,97 +33,72 @@ String.prototype.addSmartQuotes = function () {
   .replace(/(\B|^)\u2018(?=([^\u2019]*\u2019\b)*([^\u2019\u2018]*\W[\u2019\u2018]\b|[^\u2019\u2018]*$))/gi, "$1\u2019") // backwards apostrophe
   .replace(/'''/g, "\u2034") // triple prime
   .replace(/("|'')/g, "\u2033") // double prime
-  .replace(/'/g, "\u2032"); // prime
+  .replace(/'/g, "\u2032");
+}; // prime
+
+var processText = function processText(children, _ref) {
+  var smartQuotes = _ref.smartQuotes,
+      x = _ref.x,
+      y = _ref.y,
+      lineHeight = _ref.lineHeight;
+
+  if (!_util2.default.isArray(children)) return smartQuotes ? addSmartQuotes(text) : text;
+
+  return _react2.default.Children.map(children, function (string, index) {
+    return _react2.default.createElement(
+      "tspan",
+      {
+        key: index,
+        x: x,
+        y: lineHeight * index + y,
+        alignmentBaseline: "before-edge"
+      },
+      smartQuotes ? addSmartQuotes(string) : string
+    );
+  });
 };
 
-var Text = function (_DraggableBase) {
-  _inherits(Text, _DraggableBase);
+var Text = function Text(_ref2) {
+  var _ref2$x = _ref2.x,
+      x = _ref2$x === undefined ? 0 : _ref2$x,
+      _ref2$y = _ref2.y,
+      y = _ref2$y === undefined ? 0 : _ref2$y,
+      _ref2$fill = _ref2.fill,
+      fill = _ref2$fill === undefined ? "#000" : _ref2$fill,
+      _ref2$fontSize = _ref2.fontSize,
+      fontSize = _ref2$fontSize === undefined ? 20 : _ref2$fontSize,
+      _ref2$fontFamily = _ref2.fontFamily,
+      fontFamily = _ref2$fontFamily === undefined ? "serif" : _ref2$fontFamily,
+      _ref2$fontWeight = _ref2.fontWeight,
+      fontWeight = _ref2$fontWeight === undefined ? "normal" : _ref2$fontWeight,
+      _ref2$textAnchor = _ref2.textAnchor,
+      textAnchor = _ref2$textAnchor === undefined ? "start" : _ref2$textAnchor,
+      _ref2$smartQuotes = _ref2.smartQuotes,
+      smartQuotes = _ref2$smartQuotes === undefined ? false : _ref2$smartQuotes,
+      lineHeight = _ref2.lineHeight,
+      children = _ref2.children,
+      props = _objectWithoutProperties(_ref2, ["x", "y", "fill", "fontSize", "fontFamily", "fontWeight", "textAnchor", "smartQuotes", "lineHeight", "children"]);
 
-  function Text() {
-    _classCallCheck(this, Text);
+  var text = processText(children, {
+    smartQuotes: smartQuotes,
+    x: x,
+    y: y,
+    lineHeight: lineHeight || fontSize
+  });
 
-    return _possibleConstructorReturn(this, (Text.__proto__ || Object.getPrototypeOf(Text)).apply(this, arguments));
-  }
-
-  _createClass(Text, [{
-    key: "render",
-    value: function render() {
-      var _props = this.props,
-          x = _props.x,
-          y = _props.y,
-          fill = _props.fill,
-          fontSize = _props.fontSize,
-          fontFamily = _props.fontFamily,
-          fontWeight = _props.fontWeight,
-          textAnchor = _props.textAnchor,
-          smartQuotes = _props.smartQuotes;
-
-
-      var text = this.props.children;
-
-      var lineHeight = this.props.lineHeight || fontSize;
-
-      if (util.isArray(text)) {
-        text = text.map(function (string, index) {
-          if (true === smartQuotes) {
-            string = string.addSmartQuotes();
-          }
-
-          return React.createElement(
-            "tspan",
-            {
-              key: index,
-              x: x,
-              y: lineHeight * index + y,
-              alignmentBaseline: "before-edge"
-            },
-            string
-          );
-        });
-      } else {
-        if (true === smartQuotes) {
-          text = text.addSmartQuotes();
-        }
-      }
-
-      return React.createElement(
-        "text",
-        _extends({
-          x: x,
-          y: y,
-          fill: fill,
-          textAnchor: textAnchor,
-          fontSize: fontSize,
-          fontFamily: fontFamily,
-          fontWeight: fontWeight
-        }, this.draggableProps),
-        text
-      );
-    }
-  }]);
-
-  return Text;
-}(DraggableBase);
-
-// Prop types
-
-
-Text.propTypes = {
-  x: PropTypes.any.isRequired,
-  y: PropTypes.any.isRequired,
-  fill: PropTypes.string.isRequired,
-  fontSize: PropTypes.number,
-  fontFamily: PropTypes.string,
-  textAnchor: PropTypes.string
+  return _react2.default.createElement(
+    "text",
+    _extends({
+      x: x,
+      y: y,
+      fill: fill,
+      textAnchor: textAnchor,
+      fontSize: fontSize,
+      fontFamily: fontFamily,
+      fontWeight: fontWeight
+    }, props),
+    text
+  );
 };
 
-Text.defaultProps = {
-  x: 0,
-  y: 0,
-  fill: "#000",
-  fontSize: 20,
-  fontFamily: "serif",
-  textAnchor: "start"
-};
-
-module.exports = Text;
+exports.default = (0, _withDrag2.default)(Text);

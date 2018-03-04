@@ -1,75 +1,45 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _react = require("react");
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var _react2 = _interopRequireDefault(_react);
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+var _withDrag = require("./base/with-drag");
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+var _withDrag2 = _interopRequireDefault(_withDrag);
 
-var React = require("react");
-var PropTypes = require("prop-types");
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var DraggableBase = require("./base/draggable");
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
-var Rectangle = function (_DraggableBase) {
-  _inherits(Rectangle, _DraggableBase);
+var Rectangle = function Rectangle(_ref) {
+  var _ref$x = _ref.x,
+      x = _ref$x === undefined ? 0 : _ref$x,
+      _ref$y = _ref.y,
+      y = _ref$y === undefined ? 0 : _ref$y,
+      _ref$fill = _ref.fill,
+      fill = _ref$fill === undefined ? "#000" : _ref$fill,
+      _ref$gradient = _ref.gradient,
+      gradient = _ref$gradient === undefined ? null : _ref$gradient,
+      _ref$height = _ref.height,
+      height = _ref$height === undefined ? 100 : _ref$height,
+      _ref$width = _ref.width,
+      width = _ref$width === undefined ? 100 : _ref$width,
+      props = _objectWithoutProperties(_ref, ["x", "y", "fill", "gradient", "height", "width"]);
 
-  function Rectangle() {
-    _classCallCheck(this, Rectangle);
-
-    return _possibleConstructorReturn(this, (Rectangle.__proto__ || Object.getPrototypeOf(Rectangle)).apply(this, arguments));
-  }
-
-  _createClass(Rectangle, [{
-    key: "render",
-    value: function render() {
-      var _props = this.props,
-          x = _props.x,
-          y = _props.y,
-          fill = _props.fill,
-          gradient = _props.gradient,
-          height = _props.height,
-          width = _props.width;
-
-
-      if (gradient) {
-        fill = gradient;
-      }
-
-      return React.createElement("rect", _extends({
-        x: x,
-        y: y,
-        fill: fill,
-        height: height,
-        width: width
-      }, this.draggableProps));
-    }
-  }]);
-
-  return Rectangle;
-}(DraggableBase);
-
-// Prop types
-
-
-Rectangle.propTypes = {
-  x: PropTypes.any.isRequired,
-  y: PropTypes.any.isRequired,
-  fill: PropTypes.string.isRequired,
-  height: PropTypes.any.isRequired,
-  width: PropTypes.any.isRequired
+  return _react2.default.createElement("rect", _extends({
+    x: x,
+    y: y,
+    fill: gradient || fill,
+    height: height,
+    width: width
+  }, props));
 };
 
-Rectangle.defaultProps = {
-  x: 0,
-  y: 0,
-  fill: "#000",
-  height: 100,
-  width: 100
-};
-
-module.exports = Rectangle;
+exports.default = (0, _withDrag2.default)(Rectangle);

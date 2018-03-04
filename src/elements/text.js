@@ -1,11 +1,11 @@
-const util = require("util");
-const React = require("react");
-const PropTypes = require("prop-types");
+import util from "util";
+import React from "react";
 
-const DraggableBase = require("./base/draggable");
+import withDrag from "./base/with-drag";
 
-String.prototype.addSmartQuotes = function() {
-  return this.replace(/(\W|^)"(\S)/g, "$1\u201c$2") // beginning "
+const addSmartQuotes = string =>
+  string
+    .replace(/(\W|^)"(\S)/g, "$1\u201c$2") // beginning "
     .replace(/(\u201c[^"]*)"([^"]*$|[^\u201c"]*\u201c)/g, "$1\u201d$2") // ending "
     .replace(/([^0-9])"/g, "$1\u201d") // remaining " at end of word
     .replace(/(\W|^)'(\S)/g, "$1\u2018$2") // beginning '
@@ -22,82 +22,56 @@ String.prototype.addSmartQuotes = function() {
     .replace(/'''/g, "\u2034") // triple prime
     .replace(/("|'')/g, "\u2033") // double prime
     .replace(/'/g, "\u2032"); // prime
+
+const processText = (children, { smartQuotes, x, y, lineHeight }) => {
+  if (!util.isArray(children)) return smartQuotes ? addSmartQuotes(text) : text;
+
+  return React.Children.map(children, (string, index) => (
+    <tspan
+      key={index}
+      x={x}
+      y={lineHeight * index + y}
+      alignmentBaseline="before-edge"
+    >
+      {smartQuotes ? addSmartQuotes(string) : string}
+    </tspan>
+  ));
 };
 
-class Text extends DraggableBase {
-  render() {
-    const {
-      x,
-      y,
-      fill,
-      fontSize,
-      fontFamily,
-      fontWeight,
-      textAnchor,
-      smartQuotes
-    } = this.props;
+const Text = ({
+  x = 0,
+  y = 0,
+  fill = "#000",
+  fontSize = 20,
+  fontFamily = "serif",
+  fontWeight = "normal",
+  textAnchor = "start",
+  smartQuotes = false,
+  lineHeight,
+  children,
+  ...props
+}) => {
+  const text = processText(children, {
+    smartQuotes,
+    x,
+    y,
+    lineHeight: lineHeight || fontSize
+  });
 
-    let text = this.props.children;
-
-    let lineHeight = this.props.lineHeight || fontSize;
-
-    if (util.isArray(text)) {
-      text = text.map((string, index) => {
-        if (true === smartQuotes) {
-          string = string.addSmartQuotes();
-        }
-
-        return (
-          <tspan
-            key={index}
-            x={x}
-            y={lineHeight * index + y}
-            alignmentBaseline="before-edge"
-          >
-            {string}
-          </tspan>
-        );
-      });
-    } else {
-      if (true === smartQuotes) {
-        text = text.addSmartQuotes();
-      }
-    }
-
-    return (
-      <text
-        x={x}
-        y={y}
-        fill={fill}
-        textAnchor={textAnchor}
-        fontSize={fontSize}
-        fontFamily={fontFamily}
-        fontWeight={fontWeight}
-        {...this.draggableProps}
-      >
-        {text}
-      </text>
-    );
-  }
-}
-
-// Prop types
-Text.propTypes = {
-  x: PropTypes.any.isRequired,
-  y: PropTypes.any.isRequired,
-  fill: PropTypes.string.isRequired,
-  fontSize: PropTypes.number,
-  fontFamily: PropTypes.string,
-  textAnchor: PropTypes.string
+  return (
+    <text
+      x={x}
+      y={y}
+      fill={fill}
+      textAnchor={textAnchor}
+      fontSize={fontSize}
+      fontFamily={fontFamily}
+      fontWeight={fontWeight}
+      {...props}
+    >
+      {text}
+    </text>
+  );
 };
 
-Text.defaultProps = {
-  x: 0,
-  y: 0,
-  fill: "#000",
-  fontSize: 20,
-  fontFamily: "serif",
-  textAnchor: "start"
-};
-
-module.exports = Text;
+export default withDrag(Text);

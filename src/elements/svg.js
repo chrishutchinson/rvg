@@ -1,5 +1,5 @@
-const React = require("react");
-const PropTypes = require("prop-types");
+import React from "react";
+import PropTypes from "prop-types";
 
 class SVG extends React.Component {
   constructor(props) {
@@ -120,4 +120,4 @@ SVG.defaultProps = {
   fill: "transparent"
 };
 
-module.exports = SVG;
+export default SVG;

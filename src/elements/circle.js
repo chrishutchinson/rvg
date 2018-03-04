@@ -1,31 +1,13 @@
-const React = require("react");
-const PropTypes = require("prop-types");
+import React from "react";
 
-const DraggableBase = require("./base/draggable");
+import withDrag from "./base/with-drag";
 
-class Circle extends DraggableBase {
-  render() {
-    const { x, y, fill, radius } = this.props;
+const Circle = ({
+  x = 100,
+  y = 100,
+  fill = "#000",
+  radius = 100,
+  ...props
+}) => <circle cx={x} cy={y} fill={fill} r={radius} {...props} />;
 
-    return (
-      <circle cx={x} cy={y} fill={fill} r={radius} {...this.draggableProps} />
-    );
-  }
-}
-
-// Prop types
-Circle.propTypes = {
-  x: PropTypes.any.isRequired,
-  y: PropTypes.any.isRequired,
-  fill: PropTypes.string.isRequired,
-  radius: PropTypes.any.isRequired
-};
-
-Circle.defaultProps = {
-  x: 100,
-  y: 100,
-  fill: "#000",
-  radius: 100
-};
-
-module.exports = Circle;
+module.exports = withDrag(Circle);

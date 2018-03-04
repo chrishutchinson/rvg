@@ -1,60 +1,44 @@
 "use strict";
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+var _react = require("react");
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+var _react2 = _interopRequireDefault(_react);
 
-var React = require("react");
-var PropTypes = require("prop-types");
+var _withDrag = require("./base/with-drag");
 
-var LinearGradient = function (_React$Component) {
-  _inherits(LinearGradient, _React$Component);
+var _withDrag2 = _interopRequireDefault(_withDrag);
 
-  function LinearGradient() {
-    _classCallCheck(this, LinearGradient);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-    return _possibleConstructorReturn(this, (LinearGradient.__proto__ || Object.getPrototypeOf(LinearGradient)).apply(this, arguments));
-  }
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
-  _createClass(LinearGradient, [{
-    key: "render",
-    value: function render() {
-      var _props = this.props,
-          name = _props.name,
-          x1 = _props.x1,
-          x2 = _props.x2,
-          y1 = _props.y1,
-          y2 = _props.y2,
-          stops = _props.stops;
+var LinearGradient = function LinearGradient(_ref) {
+  var name = _ref.name,
+      x1 = _ref.x1,
+      x2 = _ref.x2,
+      y1 = _ref.y1,
+      y2 = _ref.y2,
+      stops = _ref.stops,
+      props = _objectWithoutProperties(_ref, ["name", "x1", "x2", "y1", "y2", "stops"]);
 
+  return _react2.default.createElement(
+    "linearGradient",
+    _extends({ id: name, x1: x1, x2: x2, y1: y1, y2: y2 }, props),
+    stops.map(function (stop, index) {
+      return _react2.default.createElement("stop", {
+        key: index,
+        offset: stop.offset,
+        stopColor: stop.color,
+        stopOpacity: stop.opacity
+      });
+    })
+  );
+};
 
-      return React.createElement(
-        "linearGradient",
-        { id: name, x1: x1, x2: x2, y1: y1, y2: y2 },
-        stops.map(function (stop, index) {
-          return React.createElement("stop", {
-            key: index,
-            offset: stop.offset,
-            stopColor: stop.color,
-            stopOpacity: stop.opacity
-          });
-        })
-      );
-    }
-  }]);
-
-  return LinearGradient;
-}(React.Component);
-
-// Prop types
-
-
-LinearGradient.propTypes = {};
-
-LinearGradient.defaultProps = {};
-
-module.exports = LinearGradient;
+exports.default = (0, _withDrag2.default)(LinearGradient);

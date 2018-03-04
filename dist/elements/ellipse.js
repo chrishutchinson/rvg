@@ -1,70 +1,37 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _react = require("react");
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var _react2 = _interopRequireDefault(_react);
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+var _withDrag = require("./base/with-drag");
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+var _withDrag2 = _interopRequireDefault(_withDrag);
 
-var React = require("react");
-var PropTypes = require("prop-types");
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var DraggableBase = require("./base/draggable");
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
-var Ellipse = function (_DraggableBase) {
-  _inherits(Ellipse, _DraggableBase);
+var Ellipse = function Ellipse(_ref) {
+  var _ref$x = _ref.x,
+      x = _ref$x === undefined ? 100 : _ref$x,
+      _ref$y = _ref.y,
+      y = _ref$y === undefined ? 50 : _ref$y,
+      _ref$fill = _ref.fill,
+      fill = _ref$fill === undefined ? "#000" : _ref$fill,
+      _ref$radiusX = _ref.radiusX,
+      radiusX = _ref$radiusX === undefined ? 100 : _ref$radiusX,
+      _ref$radiusY = _ref.radiusY,
+      radiusY = _ref$radiusY === undefined ? 50 : _ref$radiusY,
+      props = _objectWithoutProperties(_ref, ["x", "y", "fill", "radiusX", "radiusY"]);
 
-  function Ellipse() {
-    _classCallCheck(this, Ellipse);
-
-    return _possibleConstructorReturn(this, (Ellipse.__proto__ || Object.getPrototypeOf(Ellipse)).apply(this, arguments));
-  }
-
-  _createClass(Ellipse, [{
-    key: "render",
-    value: function render() {
-      var _props = this.props,
-          x = _props.x,
-          y = _props.y,
-          fill = _props.fill,
-          radiusX = _props.radiusX,
-          radiusY = _props.radiusY;
-
-
-      return React.createElement("ellipse", _extends({
-        cx: x,
-        cy: y,
-        fill: fill,
-        rx: radiusX,
-        ry: radiusY
-      }, this.draggableProps));
-    }
-  }]);
-
-  return Ellipse;
-}(DraggableBase);
-
-// Prop types
-
-
-Ellipse.propTypes = {
-  x: PropTypes.any.isRequired,
-  y: PropTypes.any.isRequired,
-  fill: PropTypes.string.isRequired,
-  radiusX: PropTypes.any.isRequired,
-  radiusY: PropTypes.any.isRequired
+  return _react2.default.createElement("ellipse", _extends({ cx: x, cy: y, fill: fill, rx: radiusX, ry: radiusY }, props));
 };
 
-Ellipse.defaultProps = {
-  x: 100,
-  y: 50,
-  fill: "#000",
-  radiusX: 100,
-  radiusY: 50
-};
-
-module.exports = Ellipse;
+exports.default = (0, _withDrag2.default)(Ellipse);
